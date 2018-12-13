@@ -5,7 +5,7 @@ var bullet = [];
 var bulletCount = 20;
 var asts = [];
 var astCount = 20;
-var points = 0;
+var points = getPoints;
 var ctx;
 
 function getPoints(cScore) {

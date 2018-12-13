@@ -9,33 +9,21 @@ var points = 0;
 var ctx;
 
 function getPoints(cScore) {
-  var name = cname + "=";
   var decodedCookie = decodeURIComponent(document.cookie);
-  var ca = decodedCookie.split(';');
-  for(var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt(0) == ' ') {
-      c = c.substring(1);
-    }
-    if (c.indexOf(name) == 0) {
-      return c.substring(name.length, c.length);
-    }
-  }
-  return "";
+  var ca = decodedCookie;
+  points = ca;
+  return ca;
 }
 
 function checkPoints() {
-    var cScore = getCookie("cScore");
+    var cScore = getPoints();
     if (cScore != "") {
       alert("You have " + cScore + " points.");
     }
 }
 
-function setPoints(cName,cValue,exDays) {
-  var d = new Date();
-  d.setTime(d.getTime() + (exDays*24*60*60*1000));
-  var expires = "expires = " + d.toGMTString();
-  document.cookie = cName + "=" + cValue + ";" + expires + ";path=/";
+function setPoints() {
+  document.cookie = points + ";path=/";
 }
 
 var screen = {
@@ -72,7 +60,7 @@ function updateGameArea() {
         bullet[i].update();
     }
     score();
-    setPoints("cScore", points, 3);
+    setPoints();
 }
 
 function Object(width, height, x, y, angle, colour, shape) {
@@ -335,6 +323,7 @@ function keyStop(evt) {
 }
 
 window.onload = function () {
+    getPoints("cScore");
     for (var i = 0; i < bulletCount; i++)
     {
         bullet[i] = new Bullet(ship.x/2, ship.y/2, ship.faceAngle);

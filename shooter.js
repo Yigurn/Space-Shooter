@@ -8,6 +8,36 @@ var astCount = 20;
 var points = 0;
 var ctx;
 
+function getPoints(cScore) {
+  var name = cname + "=";
+  var decodedCookie = decodeURIComponent(document.cookie);
+  var ca = decodedCookie.split(';');
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  return "";
+}
+
+function checkPoints() {
+    var cScore = getCookie("cScore");
+    if (cScore != "") {
+      alert("You have " + cScore + " points.");
+    }
+}
+
+function setCookie(cName,cValue,exDays) {
+  var d = new Date();
+  d.setTime(d.getTime() + (exDays*24*60*60*1000));
+  var expires = "expires = " + d.toGMTString();
+  document.cookie = cName + "=" + cValue + ";" + expires + ";path=/";
+}
+
 var screen = {
     canvas : document.createElement("canvas"),
     start : function() {
@@ -28,7 +58,7 @@ function score() {
     ctx.fillText("Points: " + points, 20, 20);
 }
 
- function updateGameArea() {
+function updateGameArea() {
     screen.clear();
     ship.newPos();
     ship.update();
@@ -42,8 +72,29 @@ function score() {
         bullet[i].update();
     }
     score();
+    setPoints("cScore", points, 3);
 }
 
+function Object(width, height, x, y, angle, colour, shape) {
+    this.width = width;
+    this.height = height;
+    this.x = x;
+    this.y = y;
+    this.angle = angle;
+    this.colour = colour;
+    this.shape = shape;
+    this.speed = 0;
+    this.update = function() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.save();
+        ctx.restore();
+        ctx.rotate(this.angle);
+        ctx.fillStyle = colour;
+        ctx.fill(tri);
+        ctx.restore();
+    }
+}
 
 
 function Bullet(x, y, angle) {

@@ -20,7 +20,7 @@ function getPoints(cScore) {
       return c.substring(name.length, c.length);
     }
   }
-  points = "th:" + ca[1] + ":";
+  points = ca[1];
   return ca;
 }
 

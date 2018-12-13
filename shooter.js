@@ -31,7 +31,7 @@ function checkPoints() {
     }
 }
 
-function setCookie(cName,cValue,exDays) {
+function setPoints(cName,cValue,exDays) {
   var d = new Date();
   d.setTime(d.getTime() + (exDays*24*60*60*1000));
   var expires = "expires = " + d.toGMTString();

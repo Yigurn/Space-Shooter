@@ -323,7 +323,7 @@ function keyStop(evt) {
 }
 
 window.onload = function () {
-    getPoints("cScore");
+    getPoints();
     for (var i = 0; i < bulletCount; i++)
     {
         bullet[i] = new Bullet(ship.x/2, ship.y/2, ship.faceAngle);

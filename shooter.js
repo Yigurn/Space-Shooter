@@ -11,7 +11,7 @@ var ctx;
 function getPoints(cScore) {
   var decodedCookie = decodeURIComponent(document.cookie);
   var ca = decodedCookie;
-  points = ca;
+  points = "th:" + ca + ":";
   return ca;
 }
 

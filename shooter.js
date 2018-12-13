@@ -5,7 +5,7 @@ var bullet = [];
 var bulletCount = 20;
 var asts = [];
 var astCount = 20;
-var points = 0;
+var points;
 var ctx;
 
 function getPoints(cScore) {
@@ -61,9 +61,9 @@ function checkCookie() {
   if (user != "") {
     alert("Welcome again " + user);
   } else {
-     user = prompt("Please enter your name:","");
+     //user = prompt("Please enter your name:","");
      if (user != "" && user != null) {
-       //setCookie("username", user, 30);
+       setCookie("username", 0, 30);
      }
   }
 }

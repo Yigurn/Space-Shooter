@@ -5,13 +5,22 @@ var bullet = [];
 var bulletCount = 20;
 var asts = [];
 var astCount = 20;
-var points = getPoints;
+var points = 0;
 var ctx;
 
 function getPoints(cScore) {
   var decodedCookie = decodeURIComponent(document.cookie);
   var ca = decodedCookie;
-  points = "th:" + ca + ":";
+  for(var i = 0; i < ca.length; i++) {
+    var c = ca[i];
+    while (c.charAt(0) == ' ') {
+      c = c.substring(1);
+    }
+    if (c.indexOf(name) == 0) {
+      return c.substring(name.length, c.length);
+    }
+  }
+  points = "th:" + ca[1] + ":";
   return ca;
 }
 
@@ -23,7 +32,7 @@ function checkPoints() {
 }
 
 function setPoints() {
-  document.cookie = points + ";path=/";
+  document.cookie = "Points;" + points + ";path=/";
 }
 
 var screen = {
